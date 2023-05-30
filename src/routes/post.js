@@ -15,9 +15,9 @@ router.get("/test", function (req, res) {
   res.send({ message: "test api" });
 });
 
-router.post("/createBlog", createBlog);
+router.post("/blogs", createBlog);
 // router.get('/getallBlog',  getblogdata)
-router.get("/getBlogs", getblogdata);
+router.get("/blogs", getblogdata);
 //with authentication and authorization---------;
 //update blog--------------------------------------------------------------------
 router.put("/blogs/:blogId", authentication,authorization ,updateBlog);
