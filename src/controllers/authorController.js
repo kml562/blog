@@ -18,7 +18,7 @@ export const createAuthor = async (req, res) => {
     Data = loopmethod(Data); //triming all the strings;----------------------------------------->>>>>>>>>>
     const { fname, lname, title, email, password } = Data;
     //first name------------------------------------------------------------------------------------------>>>
-    if (!fname.trim())
+    if (!fname)
       return res
         .status(404)
         .json({ status: false, message: "please enter the first name" });
@@ -28,7 +28,7 @@ export const createAuthor = async (req, res) => {
         .json({ status: false, message: "please enter the valid first name" });
 
     //last name----------------------------------------------------------------------------------->>>>>
-    if (!lname.trim())
+    if (!lname)
       return res
         .status(404)
         .json({ status: false, message: "please enter the last name" });
@@ -37,7 +37,7 @@ export const createAuthor = async (req, res) => {
         .status(404)
         .json({ status: false, message: "please enter the valid last name" });
     //title----------------------------------------------------------------------------------------->>>>>
-    if (!title.trim())
+    if (!title)
       return res
         .status(404)
         .json({ status: false, message: "please enter the title" });
@@ -47,7 +47,7 @@ export const createAuthor = async (req, res) => {
         .json({ status: false, message: "please enter the valid title" });
 
     //email------------------------------------------------------------------------------------------>>>
-    if (!email.trim())
+    if (!email)
       return res
         .status(404)
         .json({ status: false, message: "please enter the email" });
@@ -59,7 +59,7 @@ export const createAuthor = async (req, res) => {
     let val = toLowercase(email);
     Data.email = val;
     //password--------------------------------------------------------------------------------------->>>>>
-    if (!password.trim())
+    if (!password)
       return res
         .status(404)
         .json({ status: false, message: "please enter the password" });
@@ -117,8 +117,13 @@ export const login = async (req, res) => {
     const { JWT_SECRET, JWT_EXPIRY } = process.env;
 
     // Trim email and password
-    email = email.trim();
-    password = password.trim();
+    if (email &&typeof email === "string") {
+      email = email.trim();
+        // Convert email to lowercase
+    email = email.toLowerCase();
+    }
+    if (password && typeof password === "string") {password = password.trim(); }
+    
 
     // Email validation
     if (!email) {
@@ -128,8 +133,7 @@ export const login = async (req, res) => {
       return res.status(404).json({ status: false, message: 'Please enter a valid email' });
     }
     
-    // Convert email to lowercase
-    email = email.toLowerCase();
+  
 
     // Password validation
     if (!password) {
