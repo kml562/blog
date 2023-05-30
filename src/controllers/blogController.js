@@ -36,7 +36,7 @@ export const createBlog = async function (req, res) {
     }
 
     const getData = await BlogModel.create(blogData);
-    res.status(201).json({ status: true, messsage: getData });
+    res.status(201).json({ status: true, data: getData });
   } catch (error) {
     res.status(500).json({ status: false, messsage: error.message });
   }
@@ -166,7 +166,7 @@ export const deleteBlogbyID = async (req, res) => {
     );
     if (!data)
       return res.status(404).json({ status: false, message: "Data not found" });
-    res.status(200).json({ status: true, message: "Blog deleted" });
+    res.status(200).json({ status: true, message: "Blog deletion is successful" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -228,7 +228,7 @@ export const deleteBlog = async function (req, res) {
     console.log(data);
     if (data.modifiedCount===0)
       return res.status(404).json({ status: false, message: "Data not found" });
-    res.status(200).json({ status: true, message: `${data.modifiedCount} Blog deleted` });
+    res.status(200).json({ status: true, message: "Blog deletion is successful" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
