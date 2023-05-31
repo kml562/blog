@@ -70,7 +70,7 @@ export const getblogdata = async (req, res) => {
     console.log(getData);
     let findData = await BlogModel.find(getData).populate("authorId");
     if (findData.length === 0) {
-      return res.status(404).json({ status: false, message: "No blog found" });
+      return res.status(400).json({ status: false, message: "No blog found" });
     }
     res.status(200).json({
       status: true,
@@ -104,7 +104,7 @@ export const updateBlog = async (req, res) => {
 
     if (isDeleted) {
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "Unable to find blog" });
     } else {
       if (!isPublished || isPublished) {
@@ -153,7 +153,7 @@ export const deleteBlogbyID = async (req, res) => {
     // }
     if (!blogId)
       return res
-        .status(404)
+        .status(400)
         .send({ statu: false, message: "Please provide condition" });
     console.log(blogId)
     const data = await BlogModel.findByIdAndUpdate(
@@ -165,7 +165,7 @@ export const deleteBlogbyID = async (req, res) => {
       { new: true, upsert: true }
     );
     if (!data)
-      return res.status(404).json({ status: false, message: "Data not found" });
+      return res.status(400).json({ status: false, message: "Data not found" });
     res.status(200).json({ status: true, message: "Blog deletion is successful" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
@@ -180,7 +180,7 @@ export const deleteBlog = async function (req, res) {
     let getData = { isDeleted:false}
     if (!condition)
       return res
-        .status(404)
+        .status(400)
         .send({ statu: false, message: "Please provide condition" });
     if (authorId) {
       if (!isValidObjectId(condition.authorId)) {
@@ -227,7 +227,7 @@ export const deleteBlog = async function (req, res) {
     );
     console.log(data);
     if (data.modifiedCount===0)
-      return res.status(404).json({ status: false, message: "Data not found" });
+      return res.status(400).json({ status: false, message: "Data not found" });
     res.status(200).json({ status: true, message: "Blog deletion is successful" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
