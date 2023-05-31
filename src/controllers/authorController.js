@@ -127,10 +127,10 @@ export const login = async (req, res) => {
 
     // Email validation
     if (!email) {
-      return res.status(404).json({ status: false, message: 'Please enter the email' });
+      return res.status(400).json({ status: false, message: 'Please enter the email' });
     }
     if (!isValidEmail(email)) {
-      return res.status(404).json({ status: false, message: 'Please enter a valid email' });
+      return res.status(400).json({ status: false, message: 'Please enter a valid email' });
     }
     
   
