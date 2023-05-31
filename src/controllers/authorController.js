@@ -11,7 +11,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 
-//create auther-----------------------------------------------------------------------------------
+//create auther----------------------------------------------------------------------------------->>>>>>>>>>>
 export const createAuthor = async (req, res) => {
   try {
     let Data = req.body;
@@ -137,10 +137,10 @@ export const login = async (req, res) => {
 
     // Password validation
     if (!password) {
-      return res.status(400).json({ status: false, message: 'User registration without password' });
+      return res.status(401).json({ status: false, message: 'User registration without password' });
     }
     if (!isValidPassword(password)) {
-      return res.status(400).json({ status: false, message: 'User registration without password' });
+      return res.status(401).json({ status: false, message: 'User registration without password' });
     }
 
     const author = await AuthorModel.findOne({ email });
