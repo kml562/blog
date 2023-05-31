@@ -39,21 +39,21 @@ export const createAuthor = async (req, res) => {
     //title----------------------------------------------------------------------------------------->>>>>
     if (!title)
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the title" });
     if (!isValidName(title))
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the valid title" });
 
     //email------------------------------------------------------------------------------------------>>>
     if (!email)
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the email" });
     if (!isValidEmail(email))
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the valid email" });
     //email = tolowercase(email);
     let val = toLowercase(email);
@@ -61,11 +61,11 @@ export const createAuthor = async (req, res) => {
     //password--------------------------------------------------------------------------------------->>>>>
     if (!password)
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the password" });
     if (!isValidPassword(password))
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the valid password" });
 
     
@@ -77,7 +77,7 @@ export const createAuthor = async (req, res) => {
         .json({ status: false, message: "email already exists in database" });
     }
     //hashing  the password------------------------------------------------------------------->>>>>>>>>>>>
-    const saltRounds = 12;
+    const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     Data.password = hashedPassword; // returning the hashed password;
     const saveData = await AuthorModel.create(Data);
