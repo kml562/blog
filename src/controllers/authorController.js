@@ -146,12 +146,12 @@ export const login = async (req, res) => {
     const author = await AuthorModel.findOne({ email });
 
     if (!author) {
-      return res.status(400).json({ status: false, message: 'You are not registered' });
+      return res.status(401).json({ status: false, message: 'You are not registered' });
     }
 
     bcrypt.compare(password, author.password, function (err, passwordMatch) {
       if (err || !passwordMatch) {
-        return res.status(400).json({ status: false, message: 'Passwords do not match' });
+        return res.status(401).json({ status: false, message: 'Passwords do not match' });
       }
 
       const token = jwt.sign({ id: author._id }, JWT_SECRET, {
