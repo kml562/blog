@@ -20,21 +20,21 @@ export const createAuthor = async (req, res) => {
     //first name------------------------------------------------------------------------------------------>>>
     if (!fname)
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the first name" });
     if (!isValidName(fname))
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the valid first name" });
 
     //last name----------------------------------------------------------------------------------->>>>>
     if (!lname)
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the last name" });
     if (!isValidName(lname))
       return res
-        .status(404)
+        .status(400)
         .json({ status: false, message: "please enter the valid last name" });
     //title----------------------------------------------------------------------------------------->>>>>
     if (!title)
@@ -137,10 +137,10 @@ export const login = async (req, res) => {
 
     // Password validation
     if (!password) {
-      return res.status(404).json({ status: false, message: 'Please enter the password' });
+      return res.status(400).json({ status: false, message: 'User registration without password' });
     }
     if (!isValidPassword(password)) {
-      return res.status(404).json({ status: false, message: 'Please enter a valid password' });
+      return res.status(400).json({ status: false, message: 'User registration without password' });
     }
 
     const author = await AuthorModel.findOne({ email });
