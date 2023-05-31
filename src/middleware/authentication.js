@@ -1,9 +1,4 @@
 import jwt from "jsonwebtoken";
-
-
-
-
-
 export const authentication = (req, res, next)=> {
   try {
     //console.log(JWT_SECRET)
