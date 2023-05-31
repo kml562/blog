@@ -15,7 +15,7 @@ import jwt from "jsonwebtoken";
 export const createAuthor = async (req, res) => {
   try {
     let Data = req.body;
-    Data = loopmethod(Data); //triming all the strings;----------------------------------------->>>>>>>>>>
+
     const { fname, lname, title, email, password } = Data;
     //first name------------------------------------------------------------------------------------------>>>
     if (!fname)
@@ -68,7 +68,7 @@ export const createAuthor = async (req, res) => {
         .status(400)
         .json({ status: false, message: "please enter the valid password" });
 
-    
+        Data = loopmethod(Data); //triming all the strings;----------------------------------------->>>>>>>>>>
     // find the email is exits in userbase or not;---------------------------------------------->>>>>>>>>>
     let findData = await AuthorModel.findOne({ email: Data.email });
     if (findData) {
