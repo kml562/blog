@@ -16,7 +16,7 @@ export const authorization = async (req, res, next) => {
     let Data = await BlogModel.findOne(data);
     console.log(Data);
     if (!Data) {
-     return  res.status(404).json({status:false, message:"blog not exsist"});
+     return  res.status(400).json({status:false, message:"blog not exsist"});
     }
     if (!userKey) {
       return res.status(400).send({ status: false, message: 'Not authorized' });
